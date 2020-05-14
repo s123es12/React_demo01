@@ -9,7 +9,7 @@ import {
 import {About} from './component/About';
 import {Home} from './component/Home/Home';
 import {Register} from './component/Register';
-import {Shop} from './component/Shop';
+import {Shop} from './component/Shop/Shop';
 import {Cert} from './component/Cert';
 
 const { Header, Footer, Content } = Layout;

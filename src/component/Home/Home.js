@@ -1,40 +1,29 @@
-import React from 'react';
-import {BrowserRouter as Router,Route,Switch,Link} from 'react-router-dom'
-
-import {BigProduct} from './SubHome/BigProduct';
-import {RunProduct} from './SubHome/RunProduct';
-import {SmallProduct} from './SubHome/SmallProduct';
+import React, { useState, useEffect } from 'react';
 
 import { 
-    Layout, Menu,
+    Layout,
+    Carousel
 } from 'antd';
 
 import './Home.less';
-
-const { Header, Footer, Sider, Content } = Layout;
+import big01 from '../../resources/Big01.png';
+import big02 from '../../resources/Big02.png';
+import big03 from '../../resources/Big03.png';
+import big04 from '../../resources/Big04.png';
 export const Home =()=>{
+
+    const images = [
+        {src:big01},
+        {src:big02},
+        {src:big03},
+        {src:big04}
+    ]
+    
+    
+    
     return(
         <>
-            <Router>
-                <Layout>
-                    <Sider>
-                        <Menu>
-                            <Menu.Item><Link to="/home/bigProduct">大型器械</Link></Menu.Item>
-                            <Menu.Item><Link to="/home/smallProduct">啞鈴</Link></Menu.Item>
-                            <Menu.Item><Link to="/home/runProduct">跑步機</Link></Menu.Item>
-                        </Menu>
-                    </Sider>
-                    <Layout>
-                        <Switch>
-                            <Route path="/home/bigProduct" component={BigProduct}/>
-                            <Route path="/home/smallProduct" component={SmallProduct}/>
-                            <Route path="/home/runProduct" component={RunProduct}/>
-                        </Switch>
-                        
-                    </Layout>
-                </Layout>
-               
-            </Router>
+            
         </>
     )
 }
