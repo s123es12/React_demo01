@@ -1,8 +1,8 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox} from 'antd';
 
 
-
+import './Register.less'
 
 
 export const Register =()=>{
@@ -14,9 +14,8 @@ export const Register =()=>{
         console.log('Failed:', errorInfo);
     };
     return(
-        <>
+        <div style={{border:'10px solid yellowgreen'}}>
             <Form
-               
                 name="basic"
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
@@ -33,21 +32,39 @@ export const Register =()=>{
                 <Form.Item
                     label="Password"
                     name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[
+                        { required: true, message: 'Please input your password!'}
+                    ]}
                 >
                     <Input.Password />
                 </Form.Item>
 
-                <Form.Item name="remember" valuePropName="checked">
-                    <Checkbox>Remember me</Checkbox>
+                <Form.Item
+                    label="Comfim Password"
+                    name="comfim password"
+                    rules={[
+                        { required: true, message: 'Please input your password!'}
+                    ]}
+                >
+                    <Input.Password />
                 </Form.Item>
 
+                <Form.Item
+                    label="Email"
+                    name="email"
+                    rules={[
+                        {required:true,message:'Please input your email!'},
+                        {pattern:new RegExp(/^[0-9a-zA-Z]+\@[0-9a-zA-Z]+\.[0-9a-zA-Z]{2,4}$/),message:'Invaild Email! Please input again'}
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+               
+
                 <Form.Item >
-                    <Button type="primary" htmlType="submit">
-                    Submit
-                    </Button>
+                    <Button type="primary" htmlType="submit">Submit</Button>
                 </Form.Item>
             </Form>
-        </>
+        </div>
     )
 }

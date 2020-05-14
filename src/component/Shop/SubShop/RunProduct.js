@@ -30,7 +30,7 @@ export const RunProduct =()=>{
             <Content style={{display:'flex',padding:'20px'}}>
                 <Row>
                     {images.map((item,index)=>(
-                        <Col span={8}>
+                        <Col span={8} key={index}>
                             <Card
                                 hoverable
                                 style={{ margin:'20px'}}
