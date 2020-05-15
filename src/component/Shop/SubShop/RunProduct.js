@@ -11,7 +11,7 @@ import big08 from '../../../resources/Big08.png';
 import big09 from '../../../resources/Big09.png';
 import big10 from '../../../resources/Big10.png';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 const { Meta } = Card;
 
 export const RunProduct =()=>{

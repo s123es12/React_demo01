@@ -14,7 +14,7 @@ import big05 from '../../../resources/Big05.png';
 import big06 from '../../../resources/Big06.png';
 import big07 from '../../../resources/Big07.png';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 const { Meta } = Card;
 
 export const BigProduct =()=>{

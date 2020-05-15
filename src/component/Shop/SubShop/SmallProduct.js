@@ -12,7 +12,7 @@ import small02 from '../../../resources/small02.png';
 import small03 from '../../../resources/small03.png';
 import small04 from '../../../resources/small04.png';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 const { Meta } = Card;
 
 export const SmallProduct =()=>{

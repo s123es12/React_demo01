@@ -11,7 +11,7 @@ import {
 
 import './Shop.less';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider} = Layout;
 export const Shop =()=>{
     return(
         <>

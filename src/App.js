@@ -11,6 +11,7 @@ import {Home} from './component/Home/Home';
 import {Register} from './component/Register/Register';
 import {Shop} from './component/Shop/Shop';
 import {Cert} from './component/Cert/Cert';
+import {Login} from './component/Login/Login';
 
 const { Header, Footer, Content } = Layout;
 
@@ -29,6 +30,7 @@ export const App=()=>{
                             <Menu.Item><Link to='/shop'>Shop</Link></Menu.Item>
                             <Menu.Item><Link to='/register'>Register</Link></Menu.Item>
                             <Menu.Item><Link to='/cert'>Cert</Link></Menu.Item>
+                            <Menu.Item><Link to='/login'>Login</Link></Menu.Item>
                         </Menu>
                     
                     </Header>
@@ -40,7 +42,7 @@ export const App=()=>{
                             <Route path="/shop" component={Shop}/>
                             <Route path="/register" component={Register}/>
                             <Route path="/cert" component={Cert}/>
-
+                            <Route path="/login" component={Login}/>
                             <Redirect to="/home"/>
                         </Switch>
                     </Content>
