@@ -1,8 +1,8 @@
 import React, {useReducer, useState} from 'react';
-import {BrowserRouter as Router,Switch,Route,Link, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router,Switch,Route,Link, Redirect,useLocation } from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import {useSelector} from 'react-redux';
-import {userReducers} from './redux/reducers/reducers'
+
 import {
     Layout,
     Menu,
@@ -27,8 +27,8 @@ const { Header, Footer, Content } = Layout;
 export const App=()=>{
     const [Cookies,setCookies] = useCookies(['user_id']);
     const reducers = useSelector(state=>state);
-    
     const {userReducers} = reducers;
+    const location = useLocation();
     
     const checkUserLogin =(user_id)=>{
         
@@ -42,68 +42,57 @@ export const App=()=>{
         }
         return (isLogin)?true:false;
     }
-    const checkUserInfo=(user_id)=>{
-        for(var i=0;i<userReducers.length;i++){
-            if(userReducers[i].user_id===user_id){
-                return userReducers[i];
-            }
-        }
-    }
+   
     
     return(
         <div style={{height:"100%"}}>
-        
-        <Router>
-                <Layout style={{height:"100%"}}>
-                    <Header style={{backgroundColor:"unset"}}>
-                        <Menu 
-                            mode={"horizontal"} style={{backgroundColor:"rgba(1,1,1,0.3)"}}
-                            
-                        >   
-                            <Menu.Item><Link to='/home'>Home</Link></Menu.Item>
-                            <Menu.Item><Link to='/about'>About</Link></Menu.Item>
-                            <Menu.Item><Link to='/shop'>Shop</Link></Menu.Item>
-                            <Menu.Item><Link to='/cert'>Cert</Link></Menu.Item>
-                           
-                            {checkUserLogin(Cookies.user_id)?null:
-                            <Menu.Item><Link to='/register'>Register</Link></Menu.Item>}
-                            
-                            {checkUserLogin(Cookies.user_id)?null:
-                            <Menu.Item><Link to='/login'>Login</Link></Menu.Item>}
-
-                            {checkUserLogin(Cookies.user_id)?<Redirect to='/home/'/>:null}
-                            
-                            
-                            <Menu.Item 
-                                style={{position:"absolute",right:0,marginRight:'50px'}}
-                                icon={<UserOutlined style={{fontSize:'20px'}}/>}>
-                            </Menu.Item>
-                            
-                        </Menu>
-                       
-                    </Header>
-
-                    <Content style={{height:"100%",padding:"0 50px"}}>
-                        <Switch>
+            <Layout style={{height:"100%"}}>
+                <Header style={{backgroundColor:"unset"}}>
+                    <Menu 
+                        mode={"horizontal"} 
+                        style={{backgroundColor:"rgba(1,1,1,0.2)"}}
+                        defaultSelectedKeys={['/home']}
+                        selectedKeys={[location.pathname]}
+                    >   
+                        <Menu.Item key='/home'><Link to='/home'>Home</Link></Menu.Item>
+                        <Menu.Item key='/about'><Link to='/about'>About</Link></Menu.Item>
+                        <Menu.Item key='/shop'><Link to='/shop'>Shop</Link></Menu.Item>
+                        <Menu.Item key='/cert'><Link to='/cert'>Cert</Link></Menu.Item>
                         
-                            <Route path="/home" component={Home} />
-                            <Route path="/about" component={About}/>
-                            <Route path="/shop" component={Shop}/>
-                            <Route path="/cert" component={Cert}/>
-                            <Route path="/register" component={Register}/>
-                            <Route path="/login" component={Login}/>
-                            <Redirect to="/home"/>
-                        </Switch>
-                    </Content>
+                        {checkUserLogin(Cookies.user_id)?null:
+                        <Menu.Item><Link to='/register'>Register</Link></Menu.Item>}
+                        
+                        {checkUserLogin(Cookies.user_id)?null:
+                        <Menu.Item><Link to='/login'>Login</Link></Menu.Item>}
 
-                    <Footer style={{bottom:"0",width:"100%"}}>Footer</Footer>
+                        {checkUserLogin(Cookies.user_id)?<Redirect to='/home/'/>:null}
+                        
+                        
+                        <Menu.Item 
+                            style={{position:"absolute",right:0,marginRight:'50px'}}
+                            icon={<UserOutlined style={{fontSize:'20px'}}/>}>
+                        </Menu.Item>
+                        
+                    </Menu>
+                    
+                </Header>
 
-                </Layout>
-            
-            
-        </Router>
-       
+                <Content style={{height:"100%",padding:"0 50px",marginTop: '5px'}}>
+                    <Switch>
+                    
+                        <Route path="/home" component={Home} />
+                        <Route path="/about" component={About}/>
+                        <Route path="/shop" component={Shop}/>
+                        <Route path="/cert" component={Cert}/>
+                        <Route path="/register" component={Register}/>
+                        <Route path="/login" component={Login}/>
+                        <Redirect to="/home"/>
+                    </Switch>
+                </Content>
 
+                <Footer style={{bottom:"0",width:"100%"}}>Footer</Footer>
+
+            </Layout>
     </div>
     );
 }

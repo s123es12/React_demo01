@@ -13,23 +13,24 @@ import './Shop.less';
 
 const { Sider} = Layout;
 export const Shop =()=>{
+   
     return(
         <>
             <Router>
                 <Layout>
                     <Sider>
-                        <Menu>
-                            <Menu.Item><Link to="/home/bigProduct">大型器械</Link></Menu.Item>
-                            <Menu.Item><Link to="/home/smallProduct">啞鈴</Link></Menu.Item>
-                            <Menu.Item><Link to="/home/runProduct">跑步機</Link></Menu.Item>
+                        <Menu >
+                            <Menu.Item><Link to="/shop/bigProduct">大型器械</Link></Menu.Item>
+                            <Menu.Item><Link to="/shop/smallProduct">啞鈴</Link></Menu.Item>
+                            <Menu.Item><Link to="/shop/runProduct">跑步機</Link></Menu.Item>
                         </Menu>
                     </Sider>
                     <Layout>
                         <Switch>
-                            <Route path="/home/bigProduct" component={BigProduct}/>
-                            <Route path="/home/smallProduct" component={SmallProduct}/>
-                            <Route path="/home/runProduct" component={RunProduct}/>
-                            <Redirect to="/home/bigProduct"/>
+                            <Route path="/shop/bigProduct" component={BigProduct}/>
+                            <Route path="/shop/smallProduct" component={SmallProduct}/>
+                            <Route path="/shop/runProduct" component={RunProduct}/>
+                            <Redirect to="/shop/bigProduct"/>
                         </Switch>
                         
                     </Layout>
