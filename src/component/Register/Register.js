@@ -62,8 +62,6 @@ export const Register =()=>{
             history.replace('/register');
         }
         formRef.current.resetFields();
-        
-        
     }
     const onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);

@@ -6,8 +6,6 @@ import {useSelector} from 'react-redux';
 import {
     Layout,
     Menu,
-    Button,
-    Dropdown
 } from "antd";
 import {
     UserOutlined
@@ -23,9 +21,9 @@ import {Login} from './component/Login/Login';
 import './App.less';
 
 const { Header, Footer, Content } = Layout;
-
+const { SubMenu } = Menu;
 export const App=()=>{
-    const [Cookies,setCookies] = useCookies(['user_id']);
+    const [Cookies,setCookies,removeCookie] = useCookies(['user_id']);
     const reducers = useSelector(state=>state);
     const {userReducers} = reducers;
     const location = useLocation();
@@ -35,7 +33,6 @@ export const App=()=>{
         var isLogin = false;
         for(var i=0;i<userReducers.length;i++){
             if(userReducers[i].user_id===user_id && Cookies.user_id===user_id){
-                setCookies('user_id',user_id,{path:'/',maxAge:60*60*24});
                 isLogin=true;
                 break;
             }
@@ -43,6 +40,9 @@ export const App=()=>{
         return (isLogin)?true:false;
     }
     
+    const handleLogout=()=>{
+        removeCookie('user_id',{path:'/'});
+    }
     return(
         
         <div style={{height:"100%"}}>
@@ -68,11 +68,14 @@ export const App=()=>{
 
                         {checkUserLogin(Cookies.user_id)?<Redirect to='/home/'/>:null}
                         
-                        
+                       
+                       
                         <Menu.Item 
-                            style={{position:"absolute",right:0,marginRight:'50px'}}
-                            icon={<UserOutlined style={{fontSize:'20px'}}/>}>
-                        </Menu.Item>
+                            icon={<UserOutlined style={{fontSize:'20px'}}/>}
+                            style={{position:'absolute',right:0,marginRight:'50px'}}
+                            onClick={handleLogout}
+                        >Logout</Menu.Item>
+                       
                         
                     </Menu>
                     
@@ -86,7 +89,7 @@ export const App=()=>{
                         <Route path="/shop" component={Shop}/>
                         <Route path="/cert" component={Cert}/>
                         <Route path="/register" component={Register}/>
-                        {<Route path="/login" component={Login}/>||null}
+                        <Route path="/login" component={Login}/>
                         <Redirect to="/home"/>
                     </Switch>
                 </Content>
@@ -98,4 +101,5 @@ export const App=()=>{
         </div>
         
     );
+   
 }
