@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button} from 'antd';
 import {useDispatch,useSelector} from 'react-redux'
-
+import { useCookies } from 'react-cookie';
 import {USER_LOGIN} from '../../redux/actions/action_type';
 
 import './Login.less';
@@ -9,6 +9,8 @@ import './Login.less';
 export const Login =()=>{
     const dispatch = useDispatch();
     const reducers = useSelector(state=>state);
+    const [cookies, setCookie] = useCookies(['user_id']);
+
     const onFinish = values => {
         console.log('Success:', values);
         const {userReducers} = reducers;
@@ -18,12 +20,15 @@ export const Login =()=>{
             if(values.username===userReducers[i].username){
                 if(values.password === userReducers[i].password){
                     loginSuccess = true;
-                    dispatch({type:USER_LOGIN,values});
+                    let user_id = userReducers[i].user_id;
+                    setCookie('user_id',user_id,{path:'/',maxAge:60*60*24});
+                   
                 }
             }
         }
         if(!loginSuccess){
             console.log("username or password is Invaild!");
+           
         }
         
 
@@ -31,6 +36,7 @@ export const Login =()=>{
     
     const onFinishFailed = errorInfo => {
         console.log('Failed:', errorInfo);
+        
     };
     return(
         <div style={{border:'10px solid yellowgreen'}}>
