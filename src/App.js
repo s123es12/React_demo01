@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useReducer, useState, useEffect} from 'react';
 import {BrowserRouter as Router,Switch,Route,Link, Redirect,useLocation } from 'react-router-dom';
 import {useCookies} from 'react-cookie';
 import {useSelector} from 'react-redux';
@@ -42,10 +42,11 @@ export const App=()=>{
         }
         return (isLogin)?true:false;
     }
-   
     
     return(
+        
         <div style={{height:"100%"}}>
+           
             <Layout style={{height:"100%"}}>
                 <Header style={{backgroundColor:"unset"}}>
                     <Menu 
@@ -85,7 +86,7 @@ export const App=()=>{
                         <Route path="/shop" component={Shop}/>
                         <Route path="/cert" component={Cert}/>
                         <Route path="/register" component={Register}/>
-                        <Route path="/login" component={Login}/>
+                        {<Route path="/login" component={Login}/>||null}
                         <Redirect to="/home"/>
                     </Switch>
                 </Content>
@@ -93,6 +94,8 @@ export const App=()=>{
                 <Footer style={{bottom:"0",width:"100%"}}>Footer</Footer>
 
             </Layout>
-    </div>
+           
+        </div>
+        
     );
 }

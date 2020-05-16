@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button} from 'antd';
 import {useDispatch,useSelector} from 'react-redux'
 import { useCookies } from 'react-cookie';
 import {USER_LOGIN} from '../../redux/actions/action_type';
+import {useHistory} from'react-router-dom'
 
 import './Login.less';
 
@@ -10,7 +11,8 @@ export const Login =()=>{
     const dispatch = useDispatch();
     const reducers = useSelector(state=>state);
     const [cookies, setCookie] = useCookies(['user_id']);
-
+    const history = useHistory();
+    
     const onFinish = values => {
         console.log('Success:', values);
         const {userReducers} = reducers;
@@ -21,8 +23,11 @@ export const Login =()=>{
                 if(values.password === userReducers[i].password){
                     loginSuccess = true;
                     let user_id = userReducers[i].user_id;
+                    
                     setCookie('user_id',user_id,{path:'/',maxAge:60*60*24});
-                   
+                    
+                    
+                    history.replace('/home');
                 }
             }
         }

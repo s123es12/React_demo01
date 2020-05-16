@@ -8,6 +8,7 @@ import {
 } from '../actions/action_type'
 
 import { combineReducers } from 'redux';
+
 const userAccount=[
     {user_id:'000',username:'admin',password:'admin',email:'admin@abc.com'},
     {user_id:'001',username:'a',password:'a',email:'a@abc.com'}
@@ -34,7 +35,7 @@ const shopCertReducers=(state=shopCert,action)=>{
         case ADD_PRODUCT:
         {
             let add_product = JSON.parse(JSON.stringify(state));
-            console.log(add_product)
+            
             add_product= [...add_product,{
                 product:action.data.selectedName,
                 price:action.data.selectedPrice,
@@ -42,6 +43,7 @@ const shopCertReducers=(state=shopCert,action)=>{
                 count:1
             }]
             return add_product;
+            
         }
         case ADD_COUNT:
         {

@@ -18,7 +18,7 @@ import big05 from '../../../resources/Big05.png';
 import big06 from '../../../resources/Big06.png';
 import big07 from '../../../resources/Big07.png';
 
-import { ADD_PRODUCT } from '../../../redux/actions/action_type';
+import { ADD_PRODUCT,ADD_COUNT } from '../../../redux/actions/action_type';
 
 const { Header, Content } = Layout;
 const { Meta } = Card;
@@ -45,10 +45,33 @@ export const BigProduct =()=>{
     ]
 
     const handleBuyBtn=()=>{
+        
         setShowModal(false);
-        let product={selectedName,selectedDescription,selectedPrice}
-        console.log(product);
-        dispatch({type:ADD_PRODUCT,data:product})
+        let findProduct =false;
+        let product={selectedName,selectedDescription,selectedPrice};
+        if(shopCertReducers.length>0){
+            shopCertReducers.map((item)=>{
+                if(item.product === product.selectedName){
+                    findProduct=true;  
+                }else{
+                    for(var i=0;i<shopCertReducers.length;i++){
+                        if(shopCertReducers[i].product===product.selectedName){
+                            findProduct=true;  
+                        }
+                    }
+                    
+                }
+            })
+        }else{
+            findProduct=false;  
+        }
+        if(findProduct){
+            dispatch({type:ADD_COUNT,data:product.selectedName})
+        }else{
+            dispatch({type:ADD_PRODUCT,data:product})
+        }
+        
+        
     }
     return(
         

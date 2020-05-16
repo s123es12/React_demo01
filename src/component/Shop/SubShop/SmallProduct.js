@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+
+import {useDispatch,useSelector} from 'react-redux'
+
 import { 
     Layout,
     Card,
@@ -6,6 +9,8 @@ import {
     Row,
     Modal
 } from 'antd';
+
+import { ADD_PRODUCT,ADD_COUNT } from '../../../redux/actions/action_type';
 
 import small01 from '../../../resources/small01.png';
 import small02 from '../../../resources/small02.png';
@@ -20,12 +25,44 @@ export const SmallProduct =()=>{
     const [selectedName,setSelectedName]=useState('');
     const [selectedDescription,setSelectedDescription]=useState('');
     const [selectedPrice,setSelectedPrice]=useState();
+
+    const shopCertReducers = useSelector(state=>state.shopCertReducers);
+    const dispatch = useDispatch();
+
     const images =[
         {name:'smallProduct01', src:small01,description:'smallProduct01',price:2000 },
         {name:'smallProduct02', src:small02,description:'smallProduct02',price:2000 },
         {name:'smallProduct03', src:small03,description:'smallProduct03',price:2000 },
         {name:'smallProduct04', src:small04,description:'smallProduct04',price:2000 },
     ]
+    const handleBuyBtn=()=>{
+        
+        setShowModal(false);
+        let findProduct =false;
+        let product={selectedName,selectedDescription,selectedPrice};
+        if(shopCertReducers.length>0){
+            shopCertReducers.map((item)=>{
+                if(item.product === product.selectedName){
+                    findProduct=true;  
+                }else{
+                    for(var i=0;i<shopCertReducers.length;i++){
+                        if(shopCertReducers[i].product===product.selectedName){
+                            findProduct=true;  
+                        }
+                    }
+                    
+                }
+            })
+        }else{
+            findProduct=false;  
+        }
+        if(findProduct){
+            dispatch({type:ADD_COUNT,data:product.selectedName})
+        }else{
+            dispatch({type:ADD_PRODUCT,data:product})
+        }
+    }
+
     return(
         <>
             <Header>SmallProduct</Header>
@@ -55,7 +92,7 @@ export const SmallProduct =()=>{
                     <Modal
                         title={selectedName}
                         visible={showModal}
-                        onOk={()=>setShowModal(false)}   
+                        onOk={handleBuyBtn}   
                         onCancel={()=>setShowModal(false)}
                         okText="購買"
                         cancelText="我決定不買了"   
