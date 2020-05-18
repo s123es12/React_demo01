@@ -10,4 +10,4 @@ Cert: This page will show all products when user click "buy" button on Shop page
 
 Shop: This page is show all product, user can click the product and click the "buy" button. The product information will show when user click the product image. Any product has own information in Array.
 
-This Demo is only for student, If the images are infringed, please tell me, I will remove the image
+This Demo is only for Study, If the images are infringed, please tell me, I will remove the image
